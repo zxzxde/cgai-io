@@ -60,7 +60,10 @@ def delfile(file_path):
             print("删除对象非文件")
     else:
         if file_path not in ['/','/*']:
-            os.system("rm -rf %s"% (file_path.replace('\\','/')))
+            if isfile(file_path):
+                os.system("rm -rf %s"% (file_path.replace('\\','/')))
+            else:
+                print("删除对象非文件")
 
 def deldir(dir_path,keep_dir=False):
     """
@@ -84,7 +87,8 @@ def deldir(dir_path,keep_dir=False):
                     os.system('"find path -type f -exec rm {} \;"'.format(dir_path.replace('\\','/')))
                 else:
                     os.system("rm -rf %s"% (dir_path.replace('\\','/')))
-
+        else:
+            print("删除对象非文件目录")
 
 def delall(path,keep_dir=False):
     """
