@@ -1,25 +1,7 @@
 # -*- coding:utf-8 -*-
-import os
-import sys
+from ._util import *
 
-def iswin():
-    platform = sys.platform
-    if platform == 'win32':
-        return True
-    else:
-        return False
 
-def isfile(_path):
-    if os.path.isfile(_path):
-        return True
-    else:
-        return False
-
-def isdir(_path):
-    if os.path.isdir(_path):
-        return True
-    else:
-        return False
 
 def copyfile(src_file,des_file):
     """
@@ -30,6 +12,8 @@ def copyfile(src_file,des_file):
     """
     if isfile(src_file):
         if iswin():
+            src_file = src_file.replace('/', '\\')
+            des_file = des_file.replace('/', '\\')
             os.system('copy "%s" "%s"' % (src_file, des_file))
         else:
             os.system('cp "%s" "%s"' % (src_file, des_file))
@@ -45,6 +29,8 @@ def copydir(src_dir,des_dir):
     """
     if isdir(src_dir):
         if iswin():
+            src_dir = src_dir.replace('/', '\\')
+            des_dir = des_dir.replace('/', '\\')
             os.system('xcopy "%s" "%s" /s /e /v /y /i' % (src_dir, des_dir))
         else:
             os.system('cp -r "%s" "%s"' % (src_dir, des_dir))

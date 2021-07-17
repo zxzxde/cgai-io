@@ -24,27 +24,7 @@
 
 """
 
-import os
-import sys
-
-def iswin():
-    platform = sys.platform
-    if platform == 'win32':
-        return True
-    else:
-        return False
-
-def isfile(_path):
-    if os.path.isfile(_path):
-        return True
-    else:
-        return False
-
-def isdir(_path):
-    if os.path.isdir(_path):
-        return True
-    else:
-        return False
+from ._util import *
 
 
 def delfile(file_path):
@@ -61,7 +41,7 @@ def delfile(file_path):
     else:
         if file_path not in ['/','/*']:
             if isfile(file_path):
-                os.system("rm -rf %s"% (file_path.replace('\\','/')))
+                os.system("rm -rf %s" % (file_path.replace('\\', '/')))
             else:
                 print("删除对象非文件")
 
@@ -84,9 +64,9 @@ def deldir(dir_path,keep_dir=False):
         if isdir(dir_path):
             if dir_path not in ['/','/*']:  #禁止删全家
                 if keep_dir:
-                    os.system('"find path -type f -exec rm {} \;"'.format(dir_path.replace('\\','/')))
+                    os.system('"find path -type f -exec rm {} \;"'.format(dir_path.replace('\\', '/')))
                 else:
-                    os.system("rm -rf %s"% (dir_path.replace('\\','/')))
+                    os.system("rm -rf %s" % (dir_path.replace('\\', '/')))
         else:
             print("删除对象非文件目录")
 
@@ -103,8 +83,8 @@ def delall(path,keep_dir=False):
         else:
             os.system('"rd  /s /q "%s"' % (path.replace('/', '\\')))
     else:
-        if path not in ['/','/*']:
+        if path not in ['/', '/*']:
             if keep_dir:
-                os.system('"find path -type f -exec rm {} \;"'.format(path.replace('\\','/')))
+                os.system('"find path -type f -exec rm {} \;"'.format(path.replace('\\', '/')))
             else:
-                os.system("rm -rf %s"% (path.replace('\\','/')))
+                os.system("rm -rf %s" % (path.replace('\\', '/')))
