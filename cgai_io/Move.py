@@ -13,9 +13,9 @@ def mv(src:str,des:str):
     :return:
     """
     if iswin():
-        subprocess.Popen('move {} {}'.format(src,des))
+        os.popen('move {} {}'.format(src,des))
     else:
-        subprocess.Popen('mv {} {}'.format(src, des))
+        os.popen('mv {} {}'.format(src, des))
 
 
 def mvfile(src:str,des:str):
