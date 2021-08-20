@@ -11,10 +11,10 @@ import cgai_io as ci
 
 
 # #复制文件目录
-# src = r'D:\Temp\AA'
-# des = r'D:\Temp\BB'
+src = r'D:\Temp\AA'
+des = r'D:\Temp\C\BB'
 # ci.copydir(src,des)
-# ci.copyall(src,des)
+ci.copyall(src,des)
 
 
 
