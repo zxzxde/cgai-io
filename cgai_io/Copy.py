@@ -19,9 +19,9 @@ def copyfile(src_file,des_file,auto_create=True):
         if iswin():
             src_file = src_file.replace('/', '\\')
             des_file = des_file.replace('/', '\\')
-            subprocess.Popen('copy "%s" "%s"' % (src_file, des_file))
+            os.popen('copy "%s" "%s"' % (src_file, des_file))
         else:
-            subprocess.Popen('cp "%s" "%s"' % (src_file, des_file))
+            os.popen('cp "%s" "%s"' % (src_file, des_file))
     else:
         print('复制对象非文件类型')
 
@@ -41,9 +41,9 @@ def copydir(src_dir,des_dir,auto_create=True):
         if iswin():
             src_dir = src_dir.replace('/', '\\')
             des_dir = des_dir.replace('/', '\\')
-            subprocess.Popen('xcopy "%s" "%s" /s /e /v /y /i' % (src_dir, des_dir))
+            os.popen('xcopy "%s" "%s" /s /e /v /y /i' % (src_dir, des_dir))
         else:
-            subprocess.Popen('cp -r "%s" "%s"' % (src_dir, des_dir))
+            os.popen('cp -r "%s" "%s"' % (src_dir, des_dir))
     else:
         print('复制对象非目录类型')
 
@@ -66,15 +66,15 @@ def copyall(src,des,auto_create=True):
             if not os.path.exists(_dir):
                 os.makedirs(_dir)
         if iswin():
-            subprocess.Popen('copy "%s" "%s"' % (src, des))
+            os.popen('copy "%s" "%s"' % (src, des))
         else:
-            subprocess.Popen('cp "%s" "%s"' % (src, des))
+            os.popen('cp "%s" "%s"' % (src, des))
 
     if isdir(src):
         _dir = os.path.dirname(des)
         if not os.path.exists(_dir):
             os.makedirs(_dir)
         if iswin():
-            subprocess.Popen('xcopy "%s" "%s" /s /e /v /y /i' % (src, des))
+            os.popen('xcopy "%s" "%s" /s /e /v /y /i' % (src, des))
         else:
-            subprocess.Popen('cp -r "%s" "%s"' % (src, des))
+            os.popen('cp -r "%s" "%s"' % (src, des))
