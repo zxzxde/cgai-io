@@ -4,15 +4,18 @@ import cgai_io as ci
 
 
 # #复制文件
-# src = r'D:\Temp\2.jpg'
-# des = r'D:\Temp\2_bak.jpg'
+# src = r'D:\Temp\GAN.png'
+# des = r'D:\Temp\GAN_bak.png'
 # ci.copyfile(src,des)
+# ci.copyall(src,des)
 
 
 # #复制文件目录
 # src = r'D:\Temp\AA'
 # des = r'D:\Temp\BB'
 # ci.copydir(src,des)
+# ci.copyall(src,des)
+
 
 
 # #删除文件
