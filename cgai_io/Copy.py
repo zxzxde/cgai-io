@@ -1,25 +1,7 @@
 # -*- coding:utf-8 -*-
-import os
-import sys
+from ._util import *
 
-def iswin():
-    platform = sys.platform
-    if platform == 'win32':
-        return True
-    else:
-        return False
 
-def isfile(_path):
-    if os.path.isfile(_path):
-        return True
-    else:
-        return False
-
-def isdir(_path):
-    if os.path.isdir(_path):
-        return True
-    else:
-        return False
 
 def copyfile(src_file,des_file):
     """
@@ -56,3 +38,26 @@ def copydir(src_dir,des_dir):
         print('复制对象非目录类型')
 
 
+
+def copyall(src,des):
+    """
+    复制文件或文件夹
+    :param src:
+    :param des:
+    :return:
+    """
+    src = src.replace('/', '\\')
+    des = des.replace('/', '\\')
+
+    if isfile(src):
+
+        if iswin():
+            os.system('copy "%s" "%s"' % (src, des))
+        else:
+            os.system('cp "%s" "%s"' % (src, des))
+
+    if isdir(src):
+        if iswin():
+            os.system('xcopy "%s" "%s" /s /e /v /y /i' % (src, des))
+        else:
+            os.system('cp -r "%s" "%s"' % (src, des))
