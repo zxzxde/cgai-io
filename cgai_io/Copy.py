@@ -1,7 +1,5 @@
 # -*- coding:utf-8 -*-
 from ._util import *
-import subprocess
-
 
 def copyfile(src_file,des_file,auto_create=True):
     """

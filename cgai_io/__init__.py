@@ -5,7 +5,7 @@ from .Move import *
 from .Name import *
 from .Pack import *
 __title__ = 'cgai_io'
-__version__ = '0.0.9'
+__version__ = '1.0.0'
 __author__ = 'Master Zhang'
 __author_email__ = '360014296@qq.com'
 __license__ = 'GPLv3'

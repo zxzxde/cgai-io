@@ -35,7 +35,7 @@ def delfile(file_path):
     """
     if iswin():
         if isfile(file_path):
-            os.popen('"del /f /s /q "%s"' % (file_path.replace('/','\\')))
+            os.popen('del /f /s /q "%s"' % (file_path.replace('/','\\')))
         else:
             print("删除对象非文件")
     else:
@@ -55,16 +55,16 @@ def deldir(dir_path,keep_dir=False):
     if iswin():
         if isdir(dir_path):
             if keep_dir:
-                os.popen('"del /f /s /q "%s"' % (dir_path.replace('/', '\\')))
+                os.popen('del /f /s /q "%s"' % (dir_path.replace('/', '\\')))
             else:
-                os.popen('"rd  /s /q "%s"' % (dir_path.replace('/', '\\')))
+                os.popen('rd  /s /q "%s"' % (dir_path.replace('/', '\\')))
         else:
             print("删除对象非文件目录")
     else:
         if isdir(dir_path):
             if dir_path not in ['/','/*']:  #禁止删全家
                 if keep_dir:
-                    os.popen('"find path -type f -exec rm {} \;"'.format(dir_path.replace('\\', '/')))
+                    os.popen('find path -type f -exec rm "{}" \;'.format(dir_path.replace('\\', '/')))
                 else:
                     os.popen("rm -rf %s" % (dir_path.replace('\\', '/')))
         else:
@@ -77,14 +77,19 @@ def delall(path,keep_dir=False):
     :param keep_dir: 保持源目录结构
     :return:
     """
-    if iswin():
-        if keep_dir:
-            os.popen('"del /f /s /q "%s"' % (path.replace('/', '\\')))
-        else:
-            os.popen('"rd  /s /q "%s"' % (path.replace('/', '\\')))
-    else:
-        if path not in ['/', '/*']:
-            if keep_dir:
-                os.popen('"find path -type f -exec rm {} \;"'.format(path.replace('\\', '/')))
-            else:
-                os.popen("rm -rf %s" % (path.replace('\\', '/')))
+    # if isfile(path):
+    #     if keep_dir:
+    #         os.popen('del /f /s /q "%s"' % (path.replace('/', '\\')))
+    #     else:
+    #         os.popen('rd  /s /q "%s"' % (path.replace('/', '\\')))
+    # else:
+    #     if path not in ['/', '/*']:
+    #         if keep_dir:
+    #             os.popen('find path -type f -exec rm "{}" \;"'.format(path.replace('\\', '/')))
+    #         else:
+    #             os.popen("rm -rf %s" % (path.replace('\\', '/')))
+
+    if isfile(path):
+        delfile(path)
+    elif isdir(path):
+        deldir(path,keep_dir)
