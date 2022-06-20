@@ -25,7 +25,7 @@
 """
 
 from ._util import *
-
+import subprocess
 
 def delfile(file_path):
     """
@@ -35,13 +35,15 @@ def delfile(file_path):
     """
     if iswin():
         if isfile(file_path):
-            os.popen('del /f /s /q "%s"' % (file_path.replace('/','\\')))
+            # os.popen('del /f /s /q "%s"' % (file_path.replace('/','\\')))
+            subprocess.Popen(['del','/f','/s','/q',file_path],shell=True)
         else:
             print("删除对象非文件")
     else:
         if file_path not in ['/','/*']:
             if isfile(file_path):
-                os.popen("rm -rf %s" % (file_path.replace('\\', '/')))
+                # os.popen("rm -rf %s" % (file_path.replace('\\', '/')))
+                subprocess.Popen(['rm','-rf',file_path],shell=True)
             else:
                 print("删除对象非文件")
 
@@ -55,18 +57,22 @@ def deldir(dir_path,keep_dir=False):
     if iswin():
         if isdir(dir_path):
             if keep_dir:
-                os.popen('del /f /s /q "%s"' % (dir_path.replace('/', '\\')))
+                # os.popen('del /f /s /q "%s"' % (dir_path.replace('/', '\\')))
+                subprocess.Popen(['del','/f','/s','/q',dir_path],shell=True)
             else:
-                os.popen('rd  /s /q "%s"' % (dir_path.replace('/', '\\')))
+                # os.popen('rd  /s /q "%s"' % (dir_path.replace('/', '\\')))
+                subprocess.Popen(['rd','/s','/q',dir_path],shell=True)
         else:
             print("删除对象非文件目录")
     else:
         if isdir(dir_path):
             if dir_path not in ['/','/*']:  #禁止删全家
                 if keep_dir:
-                    os.popen('find path -type f -exec rm "{}" \;'.format(dir_path.replace('\\', '/')))
+                    # os.popen('find path -type f -exec rm "{}" \;'.format(dir_path.replace('\\', '/')))
+                    subprocess.Popen(['find','path','-type','q','-exec','rm',dir_path],shell=True)
                 else:
                     os.popen("rm -rf %s" % (dir_path.replace('\\', '/')))
+                   
         else:
             print("删除对象非文件目录")
 
