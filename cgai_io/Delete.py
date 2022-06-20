@@ -36,7 +36,7 @@ def delfile(file_path):
     if iswin():
         if isfile(file_path):
             # os.popen('del /f /s /q "%s"' % (file_path.replace('/','\\')))
-            subprocess.Popen(['del','/f','/s','/q',file_path],shell=True)
+            subprocess.Popen(['del','/f','/s','/q',file_path.replace('/','\\')],shell=True)
         else:
             print("删除对象非文件")
     else:
@@ -58,10 +58,10 @@ def deldir(dir_path,keep_dir=False):
         if isdir(dir_path):
             if keep_dir:
                 # os.popen('del /f /s /q "%s"' % (dir_path.replace('/', '\\')))
-                subprocess.Popen(['del','/f','/s','/q',dir_path],shell=True)
+                subprocess.Popen(['del','/f','/s','/q',dir_path.replace('/','\\')],shell=True)
             else:
                 # os.popen('rd  /s /q "%s"' % (dir_path.replace('/', '\\')))
-                subprocess.Popen(['rd','/s','/q',dir_path],shell=True)
+                subprocess.Popen(['rd','/s','/q',dir_path.replace('/','\\')],shell=True)
         else:
             print("删除对象非文件目录")
     else:
