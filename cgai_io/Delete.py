@@ -27,33 +27,41 @@
 from ._util import *
 import subprocess
 
-def delfile(file_path):
+def delfile(file_path,wait=False):
     """
     删除文件
     :param file_path: 文件路径
+    :param wait: 是否阻塞已等待完成
     :return:
     """
+    p = None
     if iswin():
         if isfile(file_path):
             # os.popen('del /f /s /q "%s"' % (file_path.replace('/','\\')))
-            subprocess.Popen(['del','/f','/s','/q',file_path.replace('/','\\')],shell=True)
+            p = subprocess.Popen(['del','/f','/s','/q',file_path.replace('/','\\')],shell=True)
         else:
             print("删除对象非文件")
     else:
         if file_path not in ['/','/*']:
             if isfile(file_path):
                 # os.popen("rm -rf %s" % (file_path.replace('\\', '/')))
-                subprocess.Popen(['rm','-rf',file_path],shell=True)
+                p = subprocess.Popen(['rm','-rf',file_path],shell=True)
             else:
                 print("删除对象非文件")
 
-def deldir(dir_path,keep_dir=False):
+    if p and wait:
+        p.wait()
+
+
+def deldir(dir_path,keep_dir=False,wait=False):
     """
     删除文件目录
     :param dir_path: 文件目录路径
     :param keep_dir: 保持源目录结构
+    :param wait: 是否阻塞已等待完成
     :return:
     """
+    p = None
     if iswin():
         if isdir(dir_path):
             if keep_dir:
@@ -75,12 +83,16 @@ def deldir(dir_path,keep_dir=False):
                    
         else:
             print("删除对象非文件目录")
+    if p and wait:
+        p.wait()
 
-def delall(path,keep_dir=False):
+
+def delall(path,keep_dir=False,wait=False):
     """
     无论文件还是文件目录都删除
     :param path:
     :param keep_dir: 保持源目录结构
+    :param wait: 是否阻塞已等待完成
     :return:
     """
     # if isfile(path):
@@ -96,6 +108,6 @@ def delall(path,keep_dir=False):
     #             os.popen("rm -rf %s" % (path.replace('\\', '/')))
 
     if isfile(path):
-        delfile(path)
+        delfile(path,wait)
     elif isdir(path):
-        deldir(path,keep_dir)
+        deldir(path,keep_dir,wait)
