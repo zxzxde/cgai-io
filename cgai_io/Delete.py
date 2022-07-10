@@ -66,10 +66,10 @@ def deldir(dir_path,keep_dir=False,wait=False):
         if isdir(dir_path):
             if keep_dir:
                 # os.popen('del /f /s /q "%s"' % (dir_path.replace('/', '\\')))
-                subprocess.Popen(['del','/f','/s','/q',dir_path.replace('/','\\')],shell=True)
+                p = subprocess.Popen(['del','/f','/s','/q',dir_path.replace('/','\\')],shell=True)
             else:
                 # os.popen('rd  /s /q "%s"' % (dir_path.replace('/', '\\')))
-                subprocess.Popen(['rd','/s','/q',dir_path.replace('/','\\')],shell=True)
+                p = subprocess.Popen(['rd','/s','/q',dir_path.replace('/','\\')],shell=True)
         else:
             print("删除对象非文件目录")
     else:
@@ -77,7 +77,7 @@ def deldir(dir_path,keep_dir=False,wait=False):
             if dir_path not in ['/','/*']:  #禁止删全家
                 if keep_dir:
                     # os.popen('find path -type f -exec rm "{}" \;'.format(dir_path.replace('\\', '/')))
-                    subprocess.Popen(['find','path','-type','q','-exec','rm',dir_path],shell=True)
+                    p = subprocess.Popen(['find','path','-type','q','-exec','rm',dir_path],shell=True)
                 else:
                     os.popen("rm -rf %s" % (dir_path.replace('\\', '/')))
                    
