@@ -5,7 +5,7 @@
 from ._util import *
 
 
-def mv(src:str,des:str):
+def mv(src,des):
     """
     移动文件或文件夹
     :param src: 源文件或目录
@@ -18,7 +18,7 @@ def mv(src:str,des:str):
         os.popen('mv {} {}'.format(src, des))
 
 
-def mvfile(src:str,des:str):
+def mvfile(src,des):
     """
     移动文件
     :param src: 源文件
@@ -30,7 +30,7 @@ def mvfile(src:str,des:str):
     else:
         raise Exception("输入非文件")
 
-def mvdir(src:str,des:str):
+def mvdir(src,des):
     """
     移动文件目录
     :param src: 源文件目录

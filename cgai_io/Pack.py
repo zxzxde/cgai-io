@@ -8,7 +8,7 @@ import zipfile
 
 
 
-def pack(src:str,des:str):
+def pack(src,des):
     """
     打包文件或目录
     :param src: 源文件或目录
@@ -27,7 +27,7 @@ def pack(src:str,des:str):
 
 
 
-def unpack(src:str,des_dir:str):
+def unpack(src,des_dir):
     """
     解压文件或目录
     :param src: zip路径

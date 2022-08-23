@@ -37,14 +37,12 @@ def delfile(file_path,wait=False):
     p = None
     if iswin():
         if isfile(file_path):
-            # os.popen('del /f /s /q "%s"' % (file_path.replace('/','\\')))
             p = subprocess.Popen(['del','/f','/s','/q',file_path.replace('/','\\')],shell=True)
         else:
             print("删除对象非文件")
     else:
         if file_path not in ['/','/*']:
             if isfile(file_path):
-                # os.popen("rm -rf %s" % (file_path.replace('\\', '/')))
                 p = subprocess.Popen(['rm','-rf',file_path],shell=True)
             else:
                 print("删除对象非文件")
@@ -65,10 +63,8 @@ def deldir(dir_path,keep_dir=False,wait=False):
     if iswin():
         if isdir(dir_path):
             if keep_dir:
-                # os.popen('del /f /s /q "%s"' % (dir_path.replace('/', '\\')))
                 p = subprocess.Popen(['del','/f','/s','/q',dir_path.replace('/','\\')],shell=True)
             else:
-                # os.popen('rd  /s /q "%s"' % (dir_path.replace('/', '\\')))
                 p = subprocess.Popen(['rd','/s','/q',dir_path.replace('/','\\')],shell=True)
         else:
             print("删除对象非文件目录")
@@ -76,7 +72,6 @@ def deldir(dir_path,keep_dir=False,wait=False):
         if isdir(dir_path):
             if dir_path not in ['/','/*']:  #禁止删全家
                 if keep_dir:
-                    # os.popen('find path -type f -exec rm "{}" \;'.format(dir_path.replace('\\', '/')))
                     p = subprocess.Popen(['find','path','-type','q','-exec','rm',dir_path],shell=True)
                 else:
                     os.popen("rm -rf %s" % (dir_path.replace('\\', '/')))
@@ -95,17 +90,6 @@ def delall(path,keep_dir=False,wait=False):
     :param wait: 是否阻塞已等待完成
     :return:
     """
-    # if isfile(path):
-    #     if keep_dir:
-    #         os.popen('del /f /s /q "%s"' % (path.replace('/', '\\')))
-    #     else:
-    #         os.popen('rd  /s /q "%s"' % (path.replace('/', '\\')))
-    # else:
-    #     if path not in ['/', '/*']:
-    #         if keep_dir:
-    #             os.popen('find path -type f -exec rm "{}" \;"'.format(path.replace('\\', '/')))
-    #         else:
-    #             os.popen("rm -rf %s" % (path.replace('\\', '/')))
 
     if isfile(path):
         delfile(path,wait)
