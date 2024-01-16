@@ -77,7 +77,7 @@ def copyall(src,des,auto_create=True,wait=False):
             if not os.path.exists(_dir):
                 os.makedirs(_dir)
         if iswin():
-            p = subprocess.Popen(['xcopy',src,des],shell=True)
+            p = subprocess.Popen(['copy',src,des],shell=True)
         else:
             p = subprocess.Popen(['cp',src,des],shell=True)
 
@@ -86,7 +86,7 @@ def copyall(src,des,auto_create=True,wait=False):
         if not os.path.exists(_dir):
             os.makedirs(_dir)
         if iswin():
-            p = subprocess.Popen(['copy',src,des,'/s','/e','/v','/y','/i'],shell=True)
+            p = subprocess.Popen(['xcopy',src,des,'/s','/e','/v','/y','/i'],shell=True)
         else:
             p = subprocess.Popen(['cp','-r',src,des],shell=True)
 

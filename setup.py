@@ -7,7 +7,7 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setuptools.setup(
     name="cgai_io",
-    version="1.1.5",
+    version="1.1.7",
     author="Master Zhang",
     author_email="360014296@qq.com",
     description="A simple, light and fast data stream operation Python Library.",

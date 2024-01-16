@@ -43,7 +43,7 @@ def delfile(file_path,wait=False):
     else:
         if file_path not in ['/','/*']:
             if isfile(file_path):
-                p = subprocess.Popen(['rm','-rf',file_path],shell=True)
+                p = subprocess.Popen(['rm','-rf',file_path],shell=False)
             else:
                 print("删除对象非文件")
 
@@ -72,7 +72,7 @@ def deldir(dir_path,keep_dir=False,wait=False):
         if isdir(dir_path):
             if dir_path not in ['/','/*']:  #禁止删全家
                 if keep_dir:
-                    p = subprocess.Popen(['find','path','-type','q','-exec','rm',dir_path],shell=True)
+                    p = subprocess.Popen(['find','path','-type','q','-exec','rm',dir_path],shell=False)
                 else:
                     os.popen("rm -rf %s" % (dir_path.replace('\\', '/')))
                    
