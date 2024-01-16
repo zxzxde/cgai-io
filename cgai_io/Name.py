@@ -11,7 +11,7 @@ from .Move import mv
 
 
 
-def rename(src:str,des:str):
+def rename(src,des):
     """
     重命名
     :param src: 源文件或目录
@@ -22,7 +22,7 @@ def rename(src:str,des:str):
 
 
 
-def addPrefix(src:str,prefix:str):
+def addPrefix(src,prefix):
     """
     添加前缀
     :param src: 源文件路径
@@ -35,7 +35,7 @@ def addPrefix(src:str,prefix:str):
     mv(src, des)
 
 
-def addSuffix(src: str, suffix: str):
+def addSuffix(src, suffix):
     """
     添加尾缀
     :param src: 源文件路径

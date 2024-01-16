@@ -48,10 +48,8 @@ def copydir(src_dir,des_dir,auto_create=True,wait=False):
         if iswin():
             src_dir = src_dir.replace('/', '\\')
             des_dir = des_dir.replace('/', '\\')
-            # os.popen('xcopy "%s" "%s" /s /e /v /y /i' % (src_dir, des_dir))
             p = subprocess.Popen(['xcopy',src_dir,des_dir,'/s','/e','/v','/y','/i'],shell=True)
         else:
-            # os.popen('cp -r "%s" "%s"' % (src_dir, des_dir))
             p = subprocess.Popen(['cp','-r',src_dir,des_dir],shell=True)
 
         if wait:
@@ -79,10 +77,8 @@ def copyall(src,des,auto_create=True,wait=False):
             if not os.path.exists(_dir):
                 os.makedirs(_dir)
         if iswin():
-            # os.popen('copy "%s" "%s"' % (src, des))
-            p = subprocess.Popen(['xcopy',src,des],shell=True)
+            p = subprocess.Popen(['copy',src,des],shell=True)
         else:
-            # os.popen('cp "%s" "%s"' % (src, des))
             p = subprocess.Popen(['cp',src,des],shell=True)
 
     if isdir(src):
@@ -90,10 +86,8 @@ def copyall(src,des,auto_create=True,wait=False):
         if not os.path.exists(_dir):
             os.makedirs(_dir)
         if iswin():
-            # os.popen('xcopy "%s" "%s" /s /e /v /y /i' % (src, des))
             p = subprocess.Popen(['xcopy',src,des,'/s','/e','/v','/y','/i'],shell=True)
         else:
-            # os.popen('cp -r "%s" "%s"' % (src, des))
             p = subprocess.Popen(['cp','-r',src,des],shell=True)
 
     if p and wait:
