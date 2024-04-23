@@ -13,9 +13,9 @@ def mv(src,des):
     :return:
     """
     if iswin():
-        os.popen('move {} {}'.format(src,des))
+        os.popen('move {} {}'.format(src.replace('/', '\\'),des.replace('/', '\\')))
     else:
-        os.popen('mv {} {}'.format(src, des))
+        os.popen('mv {} {}'.format(src.replace('\\', '/'), des.replace('\\', '/')))
 
 
 def mvfile(src,des):
