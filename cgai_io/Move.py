@@ -2,10 +2,11 @@
 """
 移动文件或目录
 """
+import subprocess
 from ._util import *
 
 
-def mv(src,des):
+def mv(src,des,wait=True):
     """
     移动文件或文件夹
     :param src: 源文件或目录
@@ -13,12 +14,16 @@ def mv(src,des):
     :return:
     """
     if iswin():
-        os.popen('move {} {}'.format(src.replace('/', '\\'),des.replace('/', '\\')))
+        src_file = src.replace('/', '\\')
+        des_file = des.replace('/', '\\')
+        p = subprocess.Popen(['move',src_file,des_file],shell=True)
     else:
-        os.popen('mv {} {}'.format(src.replace('\\', '/'), des.replace('\\', '/')))
+        p = subprocess.Popen(['mv',src_file,des_file],shell=True)
 
-
-def mvfile(src,des):
+    if wait:
+        p.wait()
+    
+def mvfile(src,des,wait=True):
     """
     移动文件
     :param src: 源文件
@@ -26,11 +31,11 @@ def mvfile(src,des):
     :return: 
     """
     if isfile(src):
-        mv(src,des)
+        mv(src,des,wait)
     else:
         raise Exception("输入非文件")
 
-def mvdir(src,des):
+def mvdir(src,des,wait=True):
     """
     移动文件目录
     :param src: 源文件目录
@@ -38,7 +43,7 @@ def mvdir(src,des):
     :return:
     """
     if isdir(src):
-        mv(src,des)
+        mv(src,des,wait)
     else:
         raise Exception("输入非文件目录")
 
