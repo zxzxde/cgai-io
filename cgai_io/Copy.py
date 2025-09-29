@@ -20,11 +20,13 @@ def copyfile(src_file,des_file,auto_create=True,wait=False):
             src_file = src_file.replace('/', '\\')
             des_file = des_file.replace('/', '\\')
             # os.popen('copy "%s" "%s"' % (src_file, des_file))
-            p = subprocess.Popen(['copy',src_file,des_file],shell=True)
+            cmd = 'copy "%s" "%s"' % (src_file, des_file)
+            # p = subprocess.Popen(['copy',src_file,des_file],shell=True)
         else:
             # os.popen('cp "%s" "%s"' % (src_file, des_file))
-            p = subprocess.Popen(['cp',src_file,des_file],shell=True)
-        
+            cmd = 'cp "%s" "%s"' % (src_file, des_file)
+            # p = subprocess.Popen(['cp',src_file,des_file],shell=True)
+        p = subprocess.Popen(cmd,shell=True)
         if wait:
             p.wait()
 
@@ -48,10 +50,12 @@ def copydir(src_dir,des_dir,auto_create=True,wait=False):
         if iswin():
             src_dir = src_dir.replace('/', '\\')
             des_dir = des_dir.replace('/', '\\')
-            p = subprocess.Popen(['xcopy',src_dir,des_dir,'/s','/e','/v','/y','/i'],shell=True)
+            cmd = 'xcopy "{}" "{}" /s /e /v /y /i'.format(src_dir, des_dir)
+            # p = subprocess.Popen(['xcopy',src_dir,des_dir,'/s','/e','/v','/y','/i'],shell=True)
         else:
-            p = subprocess.Popen(['cp','-r',src_dir,des_dir],shell=True)
-
+            cmd = 'cp -r "{}" "{}"'.format(src_dir, des_dir)
+            # p = subprocess.Popen(['cp','-r',src_dir,des_dir],shell=True)
+        p = subprocess.Popen(cmd,shell=True)
         if wait:
             p.wait()
     else:
@@ -77,18 +81,24 @@ def copyall(src,des,auto_create=True,wait=False):
             if not os.path.exists(_dir):
                 os.makedirs(_dir)
         if iswin():
-            p = subprocess.Popen(['copy',src,des],shell=True)
+            cmd = 'copy "{}" "{}"'.format(src, des)
+            # p = subprocess.Popen(['copy',src,des],shell=True)
         else:
-            p = subprocess.Popen(['cp',src,des],shell=True)
-
+            cmd = 'cp "{}" "{}"'.format(src, des)
+            # p = subprocess.Popen(['cp',src,des],shell=True)
+        p = subprocess.Popen(cmd,shell=True)
     if isdir(src):
         _dir = os.path.dirname(des)
         if not os.path.exists(_dir):
             os.makedirs(_dir)
         if iswin():
-            p = subprocess.Popen(['xcopy',src,des,'/s','/e','/v','/y','/i'],shell=True)
+            cmd = 'xcopy "{}" "{}" /s /e /v /y /i'.format(src, des)
+            # p = subprocess.Popen(['xcopy',src,des,'/s','/e','/v','/y','/i'],shell=True)
+            # p = subprocess.Popen(cmd,shell=True)
         else:
-            p = subprocess.Popen(['cp','-r',src,des],shell=True)
+            cmd = 'cp -r "{}" "{}"'.format(src, des)
+            # p = subprocess.Popen(['cp','-r',src,des],shell=True)
+        p = subprocess.Popen(cmd,shell=True)
 
     if p and wait:
         p.wait()
